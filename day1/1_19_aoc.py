@@ -4,18 +4,17 @@ import argparse
 
 import pytest
 
-from support import timing
+from timing import timing
 
 def get_fuel(mass: int) -> int:
     fuel = (mass // 3) - 2
     return fuel
 
-def get_all_fuel(s):
-
-    return fuel_need
 
 def compute(s: str) -> int:
-    fuel_need += (get_fuel(int(mass)) for mass in s.splitlines())
+    fuel_need = 0
+    for mass in s.splitlines():
+        fuel_need += get_fuel(int(mass))
     return fuel_need
 
 
@@ -38,7 +37,7 @@ def main() -> int:
     parser.add_argument('data_file')
     args = parser.parse_args()
 
-    with open(args.data_file) as f, timing():
+    with open(args.data_file) as f:
         print(compute(f.read()))
 
     return 0
