@@ -1,15 +1,15 @@
 # advent of code day 2
-
 import argparse
 from typing import List
+
 import pytest
 
 
-def add(pos: int, ops: List[int]):
+def add(pos: int, ops: List[int]) -> None:
     ops[ops[pos + 3]] = ops[ops[pos + 1]] + ops[ops[pos + 2]]
 
 
-def multiply(pos: int, ops: List[int]):
+def multiply(pos: int, ops: List[int]) -> None:
     ops[ops[pos + 3]] = ops[ops[pos + 1]] * ops[ops[pos + 2]]
 
 
@@ -39,16 +39,16 @@ def compute(operations: str, adjust: bool) -> List[int]:
             print(pos)
             raise Exception("THE COMPUTER BROKE")
         pos += 4
+    return []
 
 
 @pytest.mark.parametrize(
-    ('input_s', 'adjust', 'expected'),
+    ("input_s", "adjust", "expected"),
     (
-        ('1,0,0,0,99', False, [2,0,0,0,99]),
-        ('2,4,4,5,99,0', False, [2,4,4,5,99,9801]),
-        ('1,1,1,4,99,5,6,0,99', False, [30,1,1,4,2,5,6,0,99]),
+        ("1,0,0,0,99", False, [2, 0, 0, 0, 99]),
+        ("2,4,4,5,99,0", False, [2, 4, 4, 5, 99, 9801]),
+        ("1,1,1,4,99,5,6,0,99", False, [30, 1, 1, 4, 2, 5, 6, 0, 99]),
     ),
-
 )
 def test(input_s: str, expected: int, adjust: bool) -> None:
     assert compute(input_s, adjust) == expected
@@ -56,7 +56,7 @@ def test(input_s: str, expected: int, adjust: bool) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('data_file')
+    parser.add_argument("data_file")
     args = parser.parse_args()
 
     with open(args.data_file) as f:
@@ -65,5 +65,5 @@ def main() -> int:
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     exit(main())

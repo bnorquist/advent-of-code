@@ -1,15 +1,14 @@
 # advent of code day 2
-
 import argparse
-from typing import List, Tuple
-import pytest
+from typing import List
+from typing import Tuple
 
 
-def add(pos: int, ops: List[int]):
+def add(pos: int, ops: List[int]) -> None:
     ops[ops[pos + 3]] = ops[ops[pos + 1]] + ops[ops[pos + 2]]
 
 
-def multiply(pos: int, ops: List[int]):
+def multiply(pos: int, ops: List[int]) -> None:
     ops[ops[pos + 3]] = ops[ops[pos + 1]] * ops[ops[pos + 2]]
 
 
@@ -17,8 +16,6 @@ def adjust_input(ops: List[int], noun: int, verb: int) -> List[int]:
     ops[1] = noun
     ops[2] = verb
     return ops
-
-# def apply_operation(operations: List[int], pos: int):
 
 
 def run_computer(ops: List[int], noun: int, verb: int) -> List[int]:
@@ -33,8 +30,11 @@ def run_computer(ops: List[int], noun: int, verb: int) -> List[int]:
         elif ops[pos] == 99:
             return ops
         else:
-            raise Exception(f"THE COMPUTER BROKE at position: {pos}, noun {noun}, verb {verb}, operation {ops[pos]}")
+            raise Exception(
+                f"THE COMPUTER BROKE at position: {pos}, noun {noun}, verb {verb}, operation {ops[pos]}"
+            )
         pos += 4
+    return []
 
 
 def compute(operations: str) -> Tuple[int, int]:
@@ -49,10 +49,12 @@ def compute(operations: str) -> Tuple[int, int]:
             if result[0] == 19690720:
                 return result[1], result[2]
 
+    return (0, 0)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('data_file')
+    parser.add_argument("data_file")
     args = parser.parse_args()
 
     with open(args.data_file) as f:
@@ -61,5 +63,5 @@ def main() -> int:
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     exit(main())
